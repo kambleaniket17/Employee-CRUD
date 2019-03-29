@@ -10,6 +10,10 @@
     [ApiController]
     public class ValuesController : ControllerBase
     {
+       /*ublic ActionResult Index()
+        {
+            return View;
+        }*/
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()

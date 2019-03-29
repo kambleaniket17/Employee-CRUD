@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace EmployeeData.Model
+﻿namespace EmployeeData.Model
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    /// <summary>
+    /// Class Employee
+    /// </summary>
     public class Employee
     {
         /// <summary>

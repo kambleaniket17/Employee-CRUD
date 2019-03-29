@@ -1,0 +1,38 @@
+﻿<h3>
+    {{ title }}
+</h3>
+<hr />
+<form role="form" style="max-width: 500px;">
+    <strong class="error">{{ error }}</strong>
+    <div class="form-group">
+        <label for="Name">
+             Name
+        </label>
+        <input type="text" class="form-control" id="Name" ng-model="Name" />
+    </div>
+    
+    <div class="form-group">
+        <label for="City">
+            City:
+        </label>
+        <input type="text" class="form-control" id="City" ng-model="City" />
+    </div>
+    <div class="form-group">
+        <label for="Gender">
+            Gender:
+        </label>
+        <input type="text" class="form-control" id="Gender" ng-model="Gender" />
+    </div>
+   
+    <div class="form-group">
+        <label for="Department">
+            Department:
+        </label>
+        <input type="text" class="form-control" id="Department" ng-model="Department" />
+    </div>
+   
+    <a href="#/list" class="btn btn-info">Back to List</a>
+    <button type="submit" class="btn btn-default" ng-click="save()">
+        Submit
+    </button>
+</form>  

@@ -1,0 +1,37 @@
+﻿<a href="#/AddEmployee" class="btn btn-primary btn-xs">Add New Employee</a>
+<br /><br />
+<div class="table-responsive">
+    <table id="mytable" class="table table-bordred table-striped">
+        <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>City</th>
+        <th>Salary</th>
+        <th>DOB</th>
+        <!--<th>Department</th>-->
+        <th>Edit</th>
+        <th>Delete</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in ListOfEmployee">
+                <td>{{item.EmployeeID}}</td>
+                <td>{{item.Name}}</td>
+                <td>{{item.City}}</td>
+                <td>{{item.Gender}}</td>
+                <td>{{item.Department}}</td>
+                <!--<td>{{item.DepartmentName}}</td>-->
+                <td>
+                    <a class="btn btn-primary btn-xs" href="#/EditEmployee/{{item.EmployeeID}}">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-danger btn-xs" href="#/DeleteEmployee/{{item.EmployeeID}}">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

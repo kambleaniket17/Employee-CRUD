@@ -1,6 +1,13 @@
 ﻿CREATE PROCEDURE [dbo].[spAddEmployee]
-	@param1 int = 0,
-	@param2 int
+(
+@Name VARCHAR(20),
+@City VARCHAR(20),
+@Department VARCHAR(20),
+@Gender VARCHAR(6)
+)
 AS
-	SELECT @param1, @param2
-RETURN 0
+BEGIN
+INSERT INTO tblEmployee(Name,City,Department,Gender)
+VALUES(@Name,@City,@Department,@Gender)
+END
+GO
