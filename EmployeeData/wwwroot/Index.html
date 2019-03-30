@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        .table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+
+            .table th {
+                background-color: #F7F7F7;
+                color: #333;
+                font-weight: bold;
+            }
+
+            .table th, .table td {
+                padding: 5px;
+                border: 1px solid #ccc;
+            }
+    </style>
+</head>
+<body>
+    <div ng-app="HomeApp" ng-controller="EmployeeController">
+        <h1>Employee Details</h1>
+        <table id="Employee" class="table" cellpadding="0" cellspacing="0">
+            <tr>
+                <th style="width:100px">Employee Id</th>
+                <th style="width:150px">Name</th>
+                <th style="width:150px">City</th>
+                <th style="width:150px">Department</th>
+                <th style="width:150px">Gender</th>
+                <th style="width:100px"></th>
+            </tr>
+            <tbody ng-repeat="m in Employee">
+                <tr>
+                    <td><span>{{m.EmployeeId}}</span></td>
+                    <td>
+                        <span ng-hide="m.EditMode">{{m.Name}}</span>
+                        <input type="text" ng-model="m.Name" ng-show="m.EditMode" />
+                    </td>
+                    <td>
+                        <span ng-hide="m.EditMode">{{m.City}}</span>
+                        <input type="text" ng-model="m.City" ng-show="m.EditMode" />
+                    </td>
+                    <td>
+                        <span ng-hide="m.EditMode">{{m.Department}}</span>
+                        <input type="text" ng-model="m.Department" ng-show="m.EditMode" />
+                    </td>
+                    <td>
+                        <span ng-hide="m.EditMode">{{m.Gender}}</span>
+                        <input type="text" ng-model="m.Gender" ng-show="m.EditMode" />
+                    </td>
+                    <td>
+                        <a class="Edit" href="javascript:;" ng-hide="m.EditMode" ng-click="Edit($index)">Edit</a>
+                        <a class="Update" href="javascript:;" ng-show="m.EditMode" ng-click="Update($index)">Update</a>
+                        <a class="Cancel" href="javascript:;" ng-show="m.EditMode" ng-click="Cancel($index)">Cancel</a>
+                        <a href="javascript:;" ng-hide="m.EditMode" ng-click="Delete(m.EmployeeId)">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td style="width: 150px">
+                    Name<br />
+                    <input type="text" ng-model="Name" style="width:140px" />
+                </td>
+                <td style="width: 150px">
+                    City:<br />
+                    <input type="text" ng-model="City" style="width:140px" />
+                </td>
+                <td style="width: 150px">
+                    Department<br />
+                    <input type="text" ng-model="Department" style="width:140px" />
+                </td>
+                <td style="width: 150px">
+                    Gender<br />
+                    <input type="text" ng-model="Gender" style="width:140px" />
+                </td>
+                <td style="width: 200px">
+                    <br />
+                    <input type="button" value="Add" ng-click="Add()" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+    <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('HomeApp', [])
+        app.controller('EmployeeController', function ($scope, $http, $window) {
+            //Getting records from database.
+            var post = $http({
+                method: "GET",
+                url: "api/Employee/getuser",
+                dataType: 'json',
+                headers: { "Content-Type": "application/json" }
+            });
+            post.success(function (data, status) {
+                //The received response is saved in Customers array.
+                $scope.Employee = data;
+            });
+
+            //Adding new record to database.
+            $scope.Add = function () {
+                if (typeof ($scope.Name) == "undefined" || typeof ($scope.City) == "undefined" || typeof ($scope.Gender) == "undefined" || typeof ($scope.Department) == "undefined") {
+                    return;
+                }
+                var post = $http({
+                    method: "POST",
+                    url: "api/Employee/create",
+                    data: "{Name: '" + $scope.Name + "', City: '" + $scope.City + "', Gender: '" + $scope.Gender + "', Department: '" + $scope.Department + "'}",
+                    dataType: 'json',
+                    headers: { "Content-Type": "application/json" }
+                });
+                post.success(function (data, status) {
+                    //The newly inserted record is inserted into the Customers array.
+                    $scope.Employee.push(data)
+                });
+                $scope.Name = "";
+                $scope.City = "";
+                $http.Gender = "";
+                $scope.Department = "";
+            };
+
+            //This variable is used to store the original values.
+            $scope.EditItem = {};
+
+            //Editing an existing record.
+            $scope.Edit = function (index) {
+                //Setting EditMode to TRUE makes the TextBoxes visible for the row.
+                $scope.Employee[index].EditMode = true;
+
+                //The original values are saved in the variable to handle Cancel case.
+                $scope.EditItem.Name = $scope.Employee[index].Name;
+                $scope.EditItem.City = $scope.Employee[index].City;
+                $scope.EditItem.Gender = $scope.Employee[index].Gender;
+                $scope.EditItem.Department = $scope.Employee[index].Department;
+            };
+
+            //Cancelling an Edit.
+            $scope.Cancel = function (index) {
+                // The original values are restored back into the Customers Array.
+                $scope.Employee[index].Name = $scope.EditItem.Name;
+                $scope.Employee[index].City = $scope.EditItem.City;
+                $scope.Employee[index].Department = $scope.EditItem.Department;
+                $scope.Employee[index].Gender = $scope.EditItem.Gender;
+                //Setting EditMode to FALSE hides the TextBoxes for the row.
+                $scope.Employee[index].EditMode = false;
+                $scope.EditItem = {};
+            };
+
+            //Updating an existing record to database.
+            $scope.Update = function (index) {
+                var customer = $scope.Employee[index];
+                var post = $http({
+                    method: "PUT",
+                    url: "api/Employee/Edit",
+                    data: JSON.stringify(customer),
+                    dataType: 'json',
+                    headers: { "Content-Type": "application/json" }
+                });
+                post.success(function (data, status) {
+                    //Setting EditMode to FALSE hides the TextBoxes for the row.
+                    customer.EditMode = false;
+                });
+            };
+
+            //Deleting an existing record from database.
+            $scope.Delete = function (EmployeeId) {
+                if ($window.confirm("Do you want to delete this row?")) {
+                    var _customer = {};
+                    _customer.EmployeeId = EmployeeId;
+                    var post = $http({
+                        method: "DELETE",
+                        url: "/api/Employee/Delete",
+                        data: JSON.stringify(_customer),
+                        dataType: 'json',
+                        headers: { "Content-Type": "application/json" }
+                    });
+                    post.success(function (data, status) {
+                        //Remove the Deleted record from the Customers Array.
+                        $scope.Employee = $scope.Employee.filter(function (Employee) {
+                            return Employee.EmployeeId !== EmployeeId;
+                        });
+                    });
+                    post.error(function (data, status) {
+                        $window.alert(data.Message);
+                    });
+                }
+            };
+        });
+    </script>
+</body>
+</html>

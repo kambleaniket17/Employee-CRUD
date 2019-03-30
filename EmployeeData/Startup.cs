@@ -38,13 +38,11 @@
             }
             else
             {
-              
                 app.UseHsts();
             }
-
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCors("MyPolicy");
+            app.UseHttpsRedirection();
+          //  app.UseCors("MyPolicy");
             app.UseMvc();
         }
     }
