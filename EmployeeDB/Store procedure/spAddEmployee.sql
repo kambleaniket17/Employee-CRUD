@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[spAddEmployee]
+﻿--Add The Data
+CREATE PROCEDURE [dbo].[spAddEmployee]
 (
 @Name VARCHAR(20),
 @City VARCHAR(20),

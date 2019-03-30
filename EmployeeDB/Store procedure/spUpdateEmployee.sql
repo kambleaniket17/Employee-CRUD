@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[spUpdateEmployee]
+﻿--Update The Data
+CREATE PROCEDURE [dbo].[spUpdateEmployee]
 (
 @EmpId INTEGER,
 @Name VARCHAR(20),
