@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[spDeleteEmployee]
+﻿--Delete Employee
+CREATE PROCEDURE [dbo].[spDeleteEmployee]
 (
 @EmpId INTEGER
 )

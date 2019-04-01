@@ -1,4 +1,10 @@
-﻿namespace EmployeeData.Model
+﻿// -------------------------------------------------------------------------------------------------------------------------
+// <copyright file="Employee.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Aniket Kamble"/>
+// ---------------------------------------------------------------------------------------------------------------------------
+namespace EmployeeData.Model
 {
     using System;
     using System.Collections.Generic;
@@ -18,6 +24,7 @@
         /// The identifier.
         /// </value>
         public int EmployeeId { get; set; }
+
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
@@ -26,6 +33,7 @@
         /// </value>
         [Required]
         public string Name { get; set; }
+
         /// <summary>
         /// Gets or sets the gender.
         /// </summary>
@@ -34,6 +42,7 @@
         /// </value>
         [Required]
         public string Gender { get; set; }
+
         /// <summary>
         /// Gets or sets the department.
         /// </summary>
@@ -42,6 +51,7 @@
         /// </value>
         [Required]
         public string Department { get; set; }
+
         /// <summary>
         /// Gets or sets the city.
         /// </summary>
