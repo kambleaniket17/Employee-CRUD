@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿--Update Details Of Employee
+=======
+﻿--Update The Data
+>>>>>>> cd397ebda21058ead17057898a84f3e6f3904de9
 CREATE PROCEDURE [dbo].[spUpdateEmployee]
 (
 @EmpId INTEGER,

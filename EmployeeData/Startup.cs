@@ -67,10 +67,16 @@ namespace EmployeeData
             {
                 app.UseHsts();
             }
+<<<<<<< HEAD
 
             app.UseStaticFiles();
             app.UseHttpsRedirection();
           //// app.UseCors("MyPolicy");
+=======
+            app.UseStaticFiles();
+            app.UseHttpsRedirection();
+          //  app.UseCors("MyPolicy");
+>>>>>>> cd397ebda21058ead17057898a84f3e6f3904de9
             app.UseMvc();
         }
     }
