@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿--Delete Employee
-=======
-﻿--Delete The Data
->>>>>>> cd397ebda21058ead17057898a84f3e6f3904de9
+--Delete Employee
 CREATE PROCEDURE [dbo].[spDeleteEmployee]
 (
 @EmpId INTEGER
